@@ -1,8 +1,9 @@
 import { Component, tracked } from '@lifeart/gxt';
 import { Input } from '@/components/Input';
+import { TaxDetails } from '@/components/TaxDetails';
 import { autofocus } from '@/modifiers/autofocus';
 import { toRubles } from '@/utils/intl';
-import { calculateTax } from '@/utils/tax';
+import { calculateTax, calculateTaxDetails } from '@/utils/tax';
 
 export default class App extends Component {
   @tracked
@@ -24,6 +25,9 @@ export default class App extends Component {
   }
   get yearlyTax() {
     return calculateTax(this.yearlySalary);
+  }
+  get details() {
+    return calculateTaxDetails(this.yearlySalary);
   }
   <template>
     <section>
@@ -59,6 +63,9 @@ export default class App extends Component {
     <strong class="font-bold">На руки за год:</strong> {{toRubles this.totalNetSalary}}
   </p>
 </div>
+
+
+  <TaxDetails @data={{this.details}} />
 
     </section>
   </template>

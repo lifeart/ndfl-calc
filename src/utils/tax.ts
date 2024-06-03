@@ -1,3 +1,5 @@
+import { toRubles } from "./intl";
+
 type IncomeRange = {
     min: number;
     max: number;
@@ -30,4 +32,47 @@ export function calculateTax(income: number): number {
     }
     
     return tax;
+}
+
+
+interface TaxDetails {
+    bracket: string;
+    amount: number;
+    tax: number;
+}
+
+export function calculateTaxDetails(income: number): TaxDetails[] {
+    const details: TaxDetails[] = [];
+
+    if (income <= baseIncomeLimit) {
+        details.push({
+            bracket: `До ${toRubles(baseIncomeLimit)}`,
+            amount: income,
+            tax: income * baseRate
+        });
+        return details;
+    }
+
+    details.push({
+        bracket: `До ${toRubles(baseIncomeLimit)}`,
+        amount: baseIncomeLimit,
+        tax: baseIncomeLimit * baseRate
+    });
+
+    let remainingIncome = income - baseIncomeLimit;
+    for (const bracket of taxBrackets) {
+        if (remainingIncome > 0) {
+            const taxableIncome = Math.min(remainingIncome, bracket.max - bracket.min);
+            details.push({
+                bracket: `${bracket.min} - ${bracket.max === Infinity ? "бесконечность" : bracket.max} руб`,
+                amount: taxableIncome,
+                tax: taxableIncome * bracket.rate
+            });
+            remainingIncome -= taxableIncome;
+        } else {
+            break;
+        }
+    }
+    
+    return details;
 }
