@@ -42,7 +42,7 @@ export default class App extends Component {
           max="3_000_000"
           @value={{this.salary}}
           @onInput={{this.updateSalary}}
-          {{autofocus}} />
+          autofocus />
       </p>
     
 
