@@ -1,7 +1,6 @@
 import { Component, tracked } from '@lifeart/gxt';
 import { Input } from '@/components/Input';
 import { TaxDetails } from '@/components/TaxDetails';
-import { autofocus } from '@/modifiers/autofocus';
 import { toRubles } from '@/utils/intl';
 import { calculateTax, calculateTaxDetails } from '@/utils/tax';
 
