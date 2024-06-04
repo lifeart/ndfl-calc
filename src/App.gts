@@ -4,7 +4,7 @@ import { TaxDetails } from '@/components/TaxDetails';
 import { toRubles } from '@/utils/intl';
 import { calculateTax, calculateTaxDetails } from '@/utils/tax';
 
-const minSalary = 0.01;
+const minSalary = 0;
 
 export default class App extends Component {
   @tracked
