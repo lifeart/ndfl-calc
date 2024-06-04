@@ -11,7 +11,7 @@ export default class App extends Component {
     this.salary = (e.target as HTMLInputElement).valueAsNumber;
   };
   get netSalary() {
-    return (this.salary - this.monthlyTax).toFixed(2);
+    return (this.salary - (this.yearlyTax / 12)).toFixed(2);
   }
   get totalNetSalary() {
     return (this.yearlySalary - this.yearlyTax).toFixed(2);
@@ -38,7 +38,8 @@ export default class App extends Component {
           type="number"
           placeholder="Ваша месячная зарплата"
           min="0"
-          max="3_000_000"
+          max="3000000"
+          step="1000"
           @value={{this.salary}}
           @onInput={{this.updateSalary}}
           autofocus />
