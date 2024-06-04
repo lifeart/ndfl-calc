@@ -63,8 +63,12 @@ export function calculateTaxDetails(income: number): TaxDetails[] {
     for (const bracket of taxBrackets) {
         if (remainingIncome > 0) {
             const taxableIncome = Math.min(remainingIncome, bracket.max - bracket.min);
+            let bracketText =  `${toRubles(bracket.min)} — ${bracket.max === Infinity ? "∞" : toRubles(bracket.max)}`;
+            if (bracket.max === Infinity) {
+                bracketText = `От ${toRubles(bracket.min)}`;
+            }
             details.push({
-                bracket: `${bracket.min} - ${bracket.max === Infinity ? "бесконечность" : bracket.max} руб`,
+                bracket: bracketText,
                 amount: taxableIncome,
                 tax: taxableIncome * bracket.rate
             });

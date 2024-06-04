@@ -4,11 +4,14 @@ import { TaxDetails } from '@/components/TaxDetails';
 import { toRubles } from '@/utils/intl';
 import { calculateTax, calculateTaxDetails } from '@/utils/tax';
 
+const minSalary = 0.01;
+
 export default class App extends Component {
   @tracked
   salary = 15_000;
   updateSalary = (e: Event) => {
-    this.salary = (e.target as HTMLInputElement).valueAsNumber;
+    const value = (e.target as HTMLInputElement).valueAsNumber ?? minSalary;
+    this.salary = Math.abs(isNaN(value) ? minSalary: value);
   };
   get netSalary() {
     return (this.salary - (this.yearlyTax / 12)).toFixed(2);

@@ -7,7 +7,7 @@ export class TaxDetails extends Component {
       <table class='min-w-full'>
         <thead>
           <tr>
-            <th class='py-2 px-4text-left'>Уровень налогообложения</th>
+            <th class='py-2 px-4 text-left'>Уровень налогообложения</th>
             <th class='py-2 px-4 text-left'>Сумма (руб)</th>
             <th class='py-2 px-4 text-left'>Налог (руб)</th>
           </tr>
@@ -15,7 +15,7 @@ export class TaxDetails extends Component {
         <tbody>
           {{#each @data as |details|}}
             <tr class='border-t'>
-              <td class='py-2 px-4'>{{details.bracket}}</td>
+              <td class='py-2 px-4 text-left'>{{details.bracket}}</td>
               <td class='py-2 px-4'>{{toRubles details.amount}}</td>
               <td class='py-2 px-4'>{{toRubles details.tax}}</td>
             </tr>
